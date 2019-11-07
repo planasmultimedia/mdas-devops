@@ -1,0 +1,15 @@
+hay que poner que el GO compile para "alpine".
+
+Coger la imagen golang + alpine
+En vez de from 
+
+
+El goalang + alpine no lleva instalado GIT !!! 
+
+
+Habra que cambiar el apt-get por el gestor de paquetes de Alpine
+
+ALPINE NO TIENE BASH --> Reajustar
+
+
+Para los tests podemos bajarnos 

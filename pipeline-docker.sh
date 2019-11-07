@@ -2,6 +2,7 @@
 dependences (){
     go get github.com/gorilla/websocket
     go get github.com/labstack/echo
+    go get github.com/go-redis/redis
 }
 
 
@@ -61,9 +62,9 @@ test (){
 }
 
 dependences
-clean
+#clean
 #GOOS esuna variable global que dice para que distribucion compila GO
-GOOS=linux build
-#test
+#GOOS=linux build
+test
 
 
