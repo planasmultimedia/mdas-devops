@@ -1,0 +1,4 @@
+Opcion 1: Montar volumen
+Opcion 2: Crear un dockerfile que cree una imagen ngix y copiarle el fichero de configuracion
+
+** Quitar el puerto expuesto de myvotingapp. Solo tiene que estar abierto el del ngix
