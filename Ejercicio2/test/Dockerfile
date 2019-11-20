@@ -1,10 +1,11 @@
-FROM alpine:3.10
+FROM python:alpine3.10
 
-RUN apk update && \
-    apk add bash && \
-    apk add --no-cache python3
+RUN pip install requests && \
+    pip install retry
 
 COPY tests.py .
+RUN chmod +x tests.py
 
-ENTRYPOINT ["py", "test.py"]
+CMD ["python", "./tests.py"]
+#ENTRYPOINT ["./tests.py"]
 

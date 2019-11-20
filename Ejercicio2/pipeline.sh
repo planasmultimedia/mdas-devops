@@ -4,29 +4,28 @@ set -e
 docker network create alpine_votingapp || true
 
 #cleanup
-docker rm -f myvotingapp_alpine || true
+docker rm -f test2 || true
 
 #build
 docker build \
-    -t marcplanas/alpine_votingapp \
+    -t tests2 \
     ./
 
 docker run \
-    --name myvotingapp_alpine \
+    --name test2 \
     --network alpine_votingapp \
     -p 8080:80 \
-    -d marcplanas/alpine_votingapp
+    -d tests2
 
 echo Starting Tests...
 # test
 docker build \
-    -t marcplanas/votingapp_alpine-test \
+    -t marcplanas/votingapp_test \
     ./test
 
-
 docker run \
-    --rm -e VOTINGAPP_HOST="myvotingapp" \
+    --rm -e VOTINGAPP_HOST="test2" \
     --network alpine_votingapp \
-    marcplanas/votingapp_alpine-test
+    marcplanas/votingapp_test
 
-docker push marcplanas/alpine_votingapp
+docker push marcplanas/votingapp_alpine-test

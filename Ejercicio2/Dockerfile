@@ -1,23 +1,25 @@
-FROM golang AS builder
-
-RUN go get github.com/gorilla/websocket && \
-    go get github.com/labstack/echo
+FROM golang:alpine AS builder
 
 COPY . .
 
-WORKDIR src/votingapp
+RUN apk update && apk add --no-cache git && \
+    rm -rf /var/cache/apk/*
+
+WORKDIR src/votingapp  
+
+RUN go get github.com/labstack/echo && \
+    go get github.com/gorilla/websocket && \
+    go get github.com/go-redis/redis
+
 
 RUN go build -o /build/votingapp && \
     cp -r ui /build
 
 ######## RUNTIME #########
-FROM alpine:3.10
+FROM alpine
 
-RUN apk update && \
-    apk add bash && \
-    apk add --no-cache python3
+WORKDIR /app
 
 COPY --from=builder /build .
-
 
 ENTRYPOINT [ "./votingapp" ]
